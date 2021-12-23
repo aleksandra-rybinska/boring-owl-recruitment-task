@@ -5,8 +5,9 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import { LinearProgress, Box } from '@material-ui/core';
 
-import Navbar from './components/Navbar';
+import CommentList from './components/CommentList';
 import ImageSection from './components/ImageSection';
+import Navbar from './components/Navbar';
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -15,7 +16,6 @@ function App() {
     );
 
     const comments = data?.data.data;
-    console.log('comments', comments);
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -32,6 +32,7 @@ function App() {
             )}
             <Navbar theme={theme} setTheme={setTheme} />
             <ImageSection />
+            {status === 'success' && <CommentList comments={comments} />}
         </ThemeProvider>
     );
 }
